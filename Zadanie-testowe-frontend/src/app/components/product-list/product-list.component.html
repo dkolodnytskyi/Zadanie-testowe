@@ -21,7 +21,7 @@
             <p class="validation-error-message">{{validationsErrors}}</p>
             <button (click)="showCampaignForm(product.id, product.campaign)" class="edit-button">Edit Campaign</button>
             <button (click)="deleteCampaign(product.campaign.id)" class="delete-button">Delete Campaign</button>
-            <button (click)="interactCampaign(product.campaign.id)" class="interact-button">Interact</button>
+            <button (click)="interactCampaign(product.campaign.id)" class="interact-button">Interact fund</button>
         </ng-container>
 
         <!-- No Campaign -->
@@ -51,8 +51,8 @@
                 <label>
                     Status:
                     <select [(ngModel)]="campaignForm.status" name="status-{{product.id}}">
-                        <option [value]="true">Active</option>
-                        <option [value]="false">Inactive</option>
+                        <option [ngValue]="true">Active</option>
+                        <option [ngValue]="false">Inactive</option>
                     </select>
                 </label><br />
 
@@ -70,7 +70,7 @@
                 </label><br />
 
                 <label>
-                    Keywords:
+                    Keywords: (Mobile,Phone,Smartphone)
                     <input type="text" [(ngModel)]="keywordInput" name="keywords-{{product.id}}"
                         (input)="filterKeywords()" autocomplete="off" placeholder="Type to search..." />
 

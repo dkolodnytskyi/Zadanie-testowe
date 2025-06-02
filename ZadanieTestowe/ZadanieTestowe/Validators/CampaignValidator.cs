@@ -21,9 +21,6 @@ public class CampaignValidator : AbstractValidator<CampaignDto>
         RuleFor(x => x.CampaignFund)
             .GreaterThan(0).WithMessage("Campaign fund must be greater than zero.");
 
-        RuleFor(x => x.Status)
-            .NotEmpty().WithMessage("Status is required");
-
         RuleFor(x => x.TownId)
             .NotEqual(Guid.Empty).WithMessage("Town must be selected.");
 
