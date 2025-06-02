@@ -1,0 +1,99 @@
+<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="!isLoading && !error">
+    <div *ngFor="let product of products()" class="product-card">
+        <h2>{{ product.name }}</h2>
+
+        <!-- Campaign Info -->
+        <ng-container *ngIf="product.campaign">
+            <p><strong>Campaign:</strong> {{ product.campaign.name }}</p>
+            <p><strong>Bid Amount:</strong> {{ product.campaign.bidAmount }}</p>
+            <p><strong>Campaign Fund:</strong> {{ product.campaign.campaignFund }}</p>
+            <p><strong>Status:</strong> {{ product.campaign.status ? 'Active' : 'Inactive' }}</p>
+            <p><strong>Town:</strong> {{ product.campaign.town.name }}</p>
+            <p><strong>Radius:</strong> {{ product.campaign.radius }} km</p>
+            <p><strong>Keywords:</strong>
+                <span *ngFor="let keyword of product.campaign.keywords; let i = index">
+                    {{ keyword.name }}<span *ngIf="i < product.campaign.keywords.length - 1">, </span>
+                </span>
+            </p>
+            <p class="validation-error-message">{{validationsErrors}}</p>
+            <button (click)="showCampaignForm(product.id, product.campaign)" class="edit-button">Edit Campaign</button>
+            <button (click)="deleteCampaign(product.campaign.id)" class="delete-button">Delete Campaign</button>
+            <button (click)="interactCampaign(product.campaign.id)" class="interact-button">Interact</button>
+        </ng-container>
+
+        <!-- No Campaign -->
+
+        <div *ngIf="product.campaign === null">
+            <p style="color: gray;">No campaign assigned</p>
+            <button (click)="showCampaignForm(product.id, product.campaign)">Create Campaign</button>
+        </div>
+        <!-- Campaign Creation Form -->
+        <div *ngIf="selectedProductId === product.id && isFormVisible"  class="campaign-form">
+            <form (ngSubmit)="submitCampaignForm(product.id)">
+                <label>
+                    Name:
+                    <input type="text" [(ngModel)]="campaignForm.name" name="name-{{product.id}}" required />
+                </label><br />
+
+                <label>
+                    Bid Amount:
+                    <input type="number" [(ngModel)]="campaignForm.bidAmount" name="bid-{{product.id}}" required />
+                </label><br />
+
+                <label>
+                    Campaign Fund:
+                    <input type="number" [(ngModel)]="campaignForm.campaignFund" name="fund-{{product.id}}" required />
+                </label><br />
+
+                <label>
+                    Status:
+                    <select [(ngModel)]="campaignForm.status" name="status-{{product.id}}">
+                        <option [value]="true">Active</option>
+                        <option [value]="false">Inactive</option>
+                    </select>
+                </label><br />
+
+                <label>
+                    Radius (km):
+                    <input type="number" [(ngModel)]="campaignForm.radius" name="radius-{{product.id}}" required />
+                </label><br />
+
+                <label>
+                    Town:
+                    <select [(ngModel)]="campaignForm.townId" name="townId-{{product.id}}" required>
+                        <option value="" disabled selected>Choose town...</option>
+                        <option *ngFor="let town of towns" [value]="town.id">{{ town.name }}</option>
+                    </select>
+                </label><br />
+
+                <label>
+                    Keywords:
+                    <input type="text" [(ngModel)]="keywordInput" name="keywords-{{product.id}}"
+                        (input)="filterKeywords()" autocomplete="off" placeholder="Type to search..." />
+
+                    <!-- Suggestions Dropdown -->
+                    <ul *ngIf="filteredKeywords.length && keywordInput" class="suggestions">
+                        <li *ngFor="let keyword of filteredKeywords" (click)="selectKeyword(keyword)">
+                            {{ keyword.name }}
+                        </li>
+                    </ul>
+                </label><br />
+
+                <!-- Selected Keywords Display -->
+                <div class="selected-keywords">
+                    <span *ngFor="let id of campaignForm.keywordsIds" class="keyword-tag">
+                        {{ getKeywordName(id) }}
+                        <button type="button" (click)="removeKeyword(id)" class="suggestions-remove-btn">×</button>
+                    </span>
+                </div>
+
+                <button type="submit">{{ isEditing ? 'Update' : 'Submit' }}</button>
+            </form>
+        </div>
+
+        <hr />
+    </div>
+</div>

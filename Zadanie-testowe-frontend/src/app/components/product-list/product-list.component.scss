@@ -1,0 +1,131 @@
+/* Layout */
+.product-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Titles */
+.product-card h2 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+/* Labels and values */
+.product-card p {
+  margin: 0.3rem 0;
+  font-size: 14px;
+}
+
+/* Form Styles */
+.campaign-form {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.campaign-form label {
+  display: block;
+  margin: 0.5rem 0 0.2rem;
+  font-weight: 500;
+}
+
+.campaign-form input,
+.campaign-form select {
+  width: 100%;
+  padding: 0.4rem;
+  margin-bottom: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.campaign-form button {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 14px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.campaign-form button:hover {
+  background-color: #2980b9;
+}
+
+/* Error and loading */
+.error {
+  color: #e74c3c;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+button {
+  padding: 0.4rem 0.8rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  background-color: #2ecc71;
+  color: white;
+}
+
+ul>li {
+  background-color: whitesmoke;
+  margin-block: 5px;
+  position: relative;
+  right: 40px;
+  height: 20px;
+  cursor: pointer;
+}
+
+ul>li:hover {
+  background-color: #27ae60;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.keyword-tag>button{
+  height: 20px;
+  width: 20px;
+  background-color: #e74c3c;
+  padding: 0;
+}
+
+.keyword-tag>button:hover{
+  background-color: crimson;
+}
+
+.validation-error-message{
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.edit-button{
+  background-color: #2980b9;
+
+}
+
+.delete-button{
+  background-color: #e74c3c;
+  margin-inline: 10px;
+}
+
+.interact-button{
+  background-color: yellow;
+  color: black  ;
+}
+
+button:hover{
+  opacity: 0.9;
+}
